@@ -17,6 +17,6 @@ namespace Less4
         {
             return firstName + " " + lastName + " " + patronymic;
         }
-
+         
     }
 }
