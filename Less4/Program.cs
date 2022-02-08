@@ -4,37 +4,64 @@ namespace Less4
 {
     internal class Program
     {
+        enum typeOfSeason
+        {
+            Winter,
+            Spring,
+            Summer,
+            Autumn
+        }
         static void Main(string[] args)
         {
 
-            Console.WriteLine(ConvertStrToSummInt("5 10 55 43 1 3 10"));
-            Console.WriteLine(ConvertStrToSummInt("7 8 1 77 16 4 3"));
-            Console.WriteLine(ConvertStrToSummInt("1 2 3 4 5 6 7"));
+            bool isMistake = true;
+            string numMonth;
+            do
+            {
+                Console.WriteLine("Введите номер месяца:");
+                numMonth = Console.ReadLine();
+
+                if (int.TryParse(numMonth, out int numMonthInt))
+                {
+                    if (numMonthInt >= 1 && numMonthInt <= 12)
+                    {
+                        isMistake = false;
+                        continue;
+                    }
+                }
+                Console.WriteLine("Некорректный ввод. Введите число от 1 до 12");
+            }
+            while (isMistake == true);
+
+            Console.WriteLine("Текущие время года: " +  getTimeOfYearRus(getTimeOfYearEng(Convert.ToInt32(numMonth))));
             Console.ReadKey();
         }
 
-        static double ConvertStrToSummInt(string strNumber) 
+        static int getTimeOfYearEng(int numMonth)
         {
-            double summNumber = 0;
-            string numPlus = "";
-
-            for (int i = 0; i < strNumber.Length; i++)
+            switch (numMonth)
             {
-                
-                if (Char.IsNumber(strNumber[i]))
-                {
-                    numPlus += strNumber[i];
-                    if (i == strNumber.Length - 1) summNumber += Convert.ToDouble(numPlus);
-                }
-                else
-                {
-                    summNumber += Convert.ToDouble(numPlus);
-                    numPlus = "";
-                }    
-
+                case 12: case 1: case 2: return (int)typeOfSeason.Winter;
+                case 3: case 4: case 5: return (int)typeOfSeason.Spring;
+                case 6: case 7: case 8: return (int)typeOfSeason.Summer;
+                case 9: case 10: case 11: return (int)typeOfSeason.Autumn;
             }
-            return summNumber;
+            return 0;
+
         }
-         
+        static string getTimeOfYearRus(int numMonth)
+        {
+            switch (numMonth)
+            {
+                case 0: return "Зима";
+                case 1: return "Весна";
+                case 2: return "Лето";
+                case 3: return "Осень";
+            }
+            return "";
+            
+        }
+
     }
 }
+
