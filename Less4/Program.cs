@@ -6,16 +6,27 @@ namespace Less4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(GetFullName("Сидоров","Петр","Бесланович"));
-            Console.WriteLine(GetFullName("Нишкина", "Анна", "Семенович"));
-            Console.WriteLine(GetFullName("Мурзилкин", "Леонид", "Котович"));
-            Console.WriteLine(GetFullName("Столяров", "Вася", "Васильевич"));
+
+
+            Console.WriteLine("Порог расчета: ");
+            int isStop = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Число Фибоначи: " + gotoFibon(0, isStop, 0, 1));
             Console.ReadKey();
         }
 
-        static string GetFullName(string firstName, string lastName, string patronymic) 
+        static double gotoFibon(int isBegin, int isStop, Double numFirst, Double numSecond) 
         {
-            return firstName + " " + lastName + " " + patronymic;
+
+            if (isBegin < isStop)
+            {
+                isBegin++;
+                return gotoFibon(isBegin, isStop, numSecond, numFirst + numSecond);
+            }
+            else
+            {
+                return numSecond;
+            }
+          
         }
          
     }
